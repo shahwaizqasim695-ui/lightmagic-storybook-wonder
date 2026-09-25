@@ -3,7 +3,7 @@ import { useState } from "react";
 import {
   ArrowRight,
   BookOpen,
-  Butterfly,
+  Bird,
   Compass,
   Facebook,
   Feather,
@@ -82,11 +82,12 @@ function SectionTitle({ eyebrow, title, light = false, text }: { eyebrow: string
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [place, setPlace] = useState(places[0]);
+  const [place, setPlace] = useState(places[0] ?? { name: "Rainbow Falls", x: "18%", y: "28%", text: "A bright path begins where colors meet the cascading water." });
   const [galleryImage, setGalleryImage] = useState<string | null>(null);
   const [review, setReview] = useState(0);
 
-  const scrollTo = (id: string) => {
+  const scrollTo = (id: string | undefined) => {
+    if (!id) return;
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setMenuOpen(false);
   };
@@ -112,7 +113,7 @@ function Index() {
       <div className="absolute inset-0 bg-[linear-gradient(90deg,var(--night)_0%,color-mix(in_oklab,var(--night)_90%,transparent)_31%,color-mix(in_oklab,var(--night)_25%,transparent)_62%,transparent_100%)]"/>
       <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(transparent,var(--background))]"/>
       {[12,25,42,63,78,88].map((n,i)=><span key={n} className="animate-twinkle absolute size-1.5 rounded-full bg-gold-soft shadow-[0_0_12px_var(--gold-soft)]" style={{left:`${n}%`,top:`${22+(i%3)*17}%`,animationDelay:`${i*.45}s`}}/>)}
-      <Butterfly className="animate-drift absolute right-[15%] top-[28%] hidden size-7 text-gold-soft drop-shadow-lg md:block"/>
+      <Bird className="animate-drift absolute right-[15%] top-[28%] hidden size-7 text-gold-soft drop-shadow-lg md:block"/>
       <div className="relative mx-auto w-full max-w-7xl px-5 pb-20 pt-16 lg:px-8">
         <div className="max-w-[650px]">
           <p className="mb-5 font-sans text-xs font-bold uppercase tracking-[0.25em] text-gold-soft">Light Magic Story Book Collection</p>
@@ -181,7 +182,7 @@ function Index() {
     <section id="gallery" className="px-5 py-24 lg:px-8 lg:py-28"><div className="mx-auto max-w-7xl"><SectionTitle eyebrow="A Glimpse Between the Pages" title="Inside the World of Light Magic"/>
       <div className="grid auto-rows-[220px] grid-cols-2 gap-3 lg:grid-cols-4">{[
         [heroImage,"Magical landscape","col-span-2 row-span-2"],[friendsImage,"Liam and Sparkle","row-span-2"],[coverAsset.url,"The book cover","row-span-2"],[mapImage,"The magical world","col-span-2"],[authorAsset.url,"Richard Schaefer",""], [heroImage,"Beyond the rainbow",""]
-      ].map(([src,alt,span],i)=><button key={i} onClick={()=>setGalleryImage(src)} className={`group relative overflow-hidden rounded-sm ${span}`}><img src={src} loading="lazy" alt={alt} className="size-full object-cover transition duration-700 group-hover:scale-105"/><span className="absolute inset-0 bg-night/0 transition group-hover:bg-night/30"/><span className="absolute bottom-3 left-3 translate-y-4 font-sans text-xs font-bold uppercase tracking-[.12em] text-cream opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100">{alt}</span></button>)}</div>
+      ].map(([src,alt,span],i)=><button key={i} onClick={()=>src && setGalleryImage(src)} className={`group relative overflow-hidden rounded-sm ${span}`}><img src={src} loading="lazy" alt={alt} className="size-full object-cover transition duration-700 group-hover:scale-105"/><span className="absolute inset-0 bg-night/0 transition group-hover:bg-night/30"/><span className="absolute bottom-3 left-3 translate-y-4 font-sans text-xs font-bold uppercase tracking-[.12em] text-cream opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100">{alt}</span></button>)}</div>
     </div></section>
     {galleryImage && <div role="dialog" aria-modal="true" aria-label="Gallery image" className="fixed inset-0 z-[80] flex items-center justify-center bg-night/95 p-5" onClick={()=>setGalleryImage(null)}><Button variant="ghost" size="icon" className="absolute right-5 top-5 text-cream" onClick={()=>setGalleryImage(null)} aria-label="Close gallery"><X/></Button><img src={galleryImage} alt="Enlarged Light Magic gallery artwork" className="max-h-[88vh] max-w-[92vw] object-contain shadow-2xl"/></div>}
 

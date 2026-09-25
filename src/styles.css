@@ -154,7 +154,7 @@
     border-color: var(--color-border);
   }
 
-  body {
+  html {
     scroll-behavior: smooth;
   }
 
