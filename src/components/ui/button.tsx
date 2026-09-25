@@ -10,6 +10,10 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+        magical:
+          "border border-primary/40 bg-primary text-primary-foreground shadow-[0_12px_30px_color-mix(in_oklab,var(--primary)_30%,transparent)] hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_16px_38px_color-mix(in_oklab,var(--primary)_38%,transparent)]",
+        moonlight:
+          "border border-primary-foreground/35 bg-background/15 text-primary-foreground backdrop-blur-md hover:-translate-y-0.5 hover:bg-background/25",
         destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
           "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
@@ -20,7 +24,7 @@ const buttonVariants = cva(
       size: {
         default: "h-9 px-4 py-2",
         sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-10 rounded-md px-8",
+        lg: "h-12 rounded-md px-7 text-[0.82rem] font-bold uppercase tracking-[0.12em]",
         icon: "h-9 w-9",
       },
     },
